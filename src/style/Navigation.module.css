@@ -1,0 +1,18 @@
+.mainNav {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 999;
+}
+
+.logoImg {
+    max-width: 130px;
+    padding: 10px 0 0 5px;
+}
+
+.btnNav {
+    margin: 0 40px 0 0;
+}
