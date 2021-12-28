@@ -1,6 +1,5 @@
 import { Pagination, ThemeProvider } from '@mui/material'
 import { createTheme } from '@material-ui/core'
-// import { createTheme } from '@mui/material'
 
 const darkTheme = createTheme({
     palette: {

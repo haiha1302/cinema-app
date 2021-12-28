@@ -2,17 +2,15 @@ import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import styled from "styled-components"
 import CardSimilar from "../Components/CardSimilar"
-import { urlEmbed } from "../utils/contants"
 import http from '../utils/http'
+import Frame from "../Components/Frame"
 
 const StyleWatch = styled.div`
     .main-watch {
         display: flex;
         margin: 100px 0;
     }
-    .video {
-        min-height: 70vh;
-    }
+   
     .similar {
         height: 800px;
         background-color: #02080f;
@@ -54,11 +52,9 @@ const Watch = () => {
             <div className="main-watch container">
                 <div className="col-9">
                     <div>
-                        <iframe 
-                            src={urlEmbed(params.id)}
-                            title="Movies or TV Series"
-                            allowFullScreen
-                            className="w-100 video"
+                        <Frame 
+                            type='movie'
+                            id={params.id}
                         />
                     </div>
                     <div className="text-light">
@@ -75,6 +71,7 @@ const Watch = () => {
                                 key={data.id}
                                 title={data.title}
                                 poster_path={data.poster_path}
+                                id={data.id}
                             />
                         )
                     })}

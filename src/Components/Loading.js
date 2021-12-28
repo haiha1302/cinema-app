@@ -1,10 +1,10 @@
 import Loader from "react-loader-spinner";
 
-const Loading = () => {
+const Loading = (props) => {
     return (
-        <div className="vh-100 d-flex justify-content-center align-items-center">
+        <div className={`vh-100 d-flex justify-content-center align-items-${props.position}`}>
             <Loader
-                type="Puff"
+                type={props.typeLoad}
                 color="#00BFFF"
                 height={100}
                 width={100}

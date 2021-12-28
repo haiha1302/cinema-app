@@ -1,23 +1,7 @@
 import { Nav } from "react-bootstrap"
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 import styles from '../../style/Navigation.module.css'
 import styled from "styled-components"
-
-const ButtonNav = styled.button`
-    padding: 5px 15px;
-    border: none;
-    margin-left: 10px;
-    border-radius: 10px;
-    background: transparent;
-    color: white;
-    font-size: 20px;
-    font-weight: 700;
-
-    :hover {
-        color: #FF66CC;
-        border: 1px solid #FF66CC;
-    }
-`
 
 const NavLinkStyle = styled.div`
     .navLink {
@@ -40,10 +24,14 @@ const NavLinkStyle = styled.div`
     }
 `
 
-const NavigationBar = () => {
+const NavigationBar = (props) => {
+    const handleLogout = () => {
+        window.open("http://localhost:5000/auth/logout", "_self");
+    };
+
     return (
         <div className={styles.mainNav}>
-            <div className="ms-5 d-flex align-items-center">
+            <div className={styles.navControls}>
                 <NavLink to='/'>
                     <img 
                         src='https://upload.wikimedia.org/wikipedia/commons/6/61/Xilam_-_Logo.png'
@@ -59,9 +47,23 @@ const NavigationBar = () => {
                     </Nav>
                 </NavLinkStyle>
             </div>  
-            <div className={styles.btnNav}>
-                <ButtonNav>Login</ButtonNav>
-                <ButtonNav>Register</ButtonNav>
+            <div className="me-5">
+                {
+                    props.user ? 
+                    <div className={styles.userInfo}>
+                        <img 
+                            src={props.user.photos[0].value}
+                            alt="avatar_user"
+                            className={styles.avatarUser}
+                        />
+                        <div className={styles.nameUser}>{props.user.displayName}</div>
+                        <div onClick={handleLogout}>Logout</div>
+                    </div> :
+                    <>
+                        <Link to='/login' className={styles.btnNav}>Login</Link>
+                        <Link to='/register' className={styles.btnNav}>Register</Link>
+                    </>
+                }
             </div>
         </div>   
     )

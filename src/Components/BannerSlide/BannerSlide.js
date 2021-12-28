@@ -2,7 +2,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import SwiperCore, { Navigation, Autoplay } from "swiper";
-import CardBanner from "../CardBanner";
+import CardBanner from "./CardBanner";
 
 SwiperCore.use([Navigation, Autoplay]);
 

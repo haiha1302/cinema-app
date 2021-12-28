@@ -1,6 +1,5 @@
-import { posterNotAvailable } from '../utils/contants'
 import { Link } from 'react-router-dom'
-import { poster } from '../utils/contants'
+import { poster, posterNotAvailable } from '../utils/contants'
 import styled from 'styled-components'
 
 const CardStyle = styled.div`
@@ -16,12 +15,32 @@ const CardStyle = styled.div`
     .poster {
         border-radius: 6px;
         width: 100%;
-        height: 300px;
+        height: 290px;
+        min-height: 100px;
         -webkit-transition: all 0.5s ease;
         -moz-transition: all 0.5s ease;
         -ms-transition: all 0.5s ease;
         transition: all 0.3s ease;
     }
+
+    @media (max-width: 990px) {
+        .poster {
+            height: 230px;
+        }
+    }
+
+    @media (max-width: 1200px) {
+        .poster {
+            height: 250px;
+        }
+    }
+
+    @media (max-width: 1450px) {
+        .poster {
+            height: 280px;
+        }
+    }
+
     .poster:hover {
         transform: scale(1.05);
         border: 1px solid #111;

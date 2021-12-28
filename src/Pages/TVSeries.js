@@ -43,11 +43,18 @@ const TVSeries = () => {
         }, 1000);
     })
 
+    useEffect(() => {
+        window.scroll({
+            top: 0,
+            behavior: 'smooth'
+        })
+    })
+
     return (
         <>
             {
                 loading === true ?
-                <Loading /> :
+                <Loading typeLoad='Plane' position='center' /> :
                 <>
                     <MainPage>
                         <div className='main-container container'>

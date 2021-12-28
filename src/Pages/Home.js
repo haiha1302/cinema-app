@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import BannerSlide from "../Components/Shared/BannerSlide"
+import BannerSlide from "../Components/BannerSlide/BannerSlide"
 import Slider from "../Components/Slider"
 import http from '../utils/http'
 import Loading from "../Components/Loading"
@@ -66,11 +66,18 @@ const Home = () => {
         }, 1000);
     })
 
+    useEffect(() => {
+        window.scroll({
+            top: 0,
+            behavior: 'smooth'
+        })
+    })
+
     return (
         <div>
             {
                 loading === true ?
-                <Loading /> :
+                <Loading typeLoad='Plane' position='center' /> :
                 <>
                     <BannerSlide data={dataBanner} />
                     {dataAll.map(data => {

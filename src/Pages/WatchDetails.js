@@ -3,14 +3,14 @@ import { Link, useParams } from 'react-router-dom'
 import http from '../utils/http'
 import styled from "styled-components"
 import Button from "../Components/Button"
-import SeasonsTV from "../Components/Shared/SeasonsTV"
 import Loading from "../Components/Loading"
+import ShowSeasons from "../Components/ShowSeasons/ShowSeasons"
 
 const Details = styled.div`
     position: absolute;
     top: 0;
     width: 100%;
-    height: 100%;
+    min-height: 100vh;
     background-color: #02080f;
     
     .big-img-banner {
@@ -48,7 +48,7 @@ const WatchDetails = () => {
         });
         setDataDetails(data.data)
     }
-    // console.log(dataDetails);
+    
     useEffect(() => {
         fetchDataDetails()
     }, [])
@@ -63,7 +63,7 @@ const WatchDetails = () => {
         <>
             {
                 loading === true ?
-                <Loading /> :
+                <Loading typeLoad='Plane' position='center' /> :
                 <>
                     <Details>
                         <img
@@ -82,7 +82,7 @@ const WatchDetails = () => {
                                 </BannerImg>
                                 <div className=" text-light ms-4 me-5">
                                     <div>
-                                        <Link to={`/${params.type}/${params.id}`}>
+                                        <Link to={params.type === 'movie' ? `/${params.type}/${params.id}` : `/${params.type}/${params.id}/season=1/episode=1`}>
                                             <Button name='Play Now' />
                                         </Link>
                                     </div>
@@ -95,12 +95,12 @@ const WatchDetails = () => {
                                 </div>
                             </div>
                         </div>
+                        
                         {
-                            dataDetails.seasons ? 
-                            <SeasonsTV type={params.type} id={params.id} seasons={dataDetails.seasons} /> :
+                            params.type === 'tv' ?
+                            <ShowSeasons data={dataDetails.seasons} id={params.id} /> :
                             null
                         }
-                        
                     </Details>
                 </>
             }

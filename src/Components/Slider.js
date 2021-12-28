@@ -7,7 +7,7 @@ SwiperCore.use([Navigation, Autoplay]);
 
 const Slider = (props) => {
     return (
-        <div className='container mt-3'>
+        <div className='mt-3'>
             <div className='d-flex justify-content-between'>
                 <h3 className='text-light fst-italic'>{props.title}</h3>
                 {
@@ -18,12 +18,26 @@ const Slider = (props) => {
             </div>
             <Swiper 
                 navigation={true} 
-                slidesPerView={6}
+                slidesPerView={2}
                 className="mySwiper"
                 loop={true}
                 autoplay={{
                     delay: 2000,
                     disableOnInteraction: false
+                }}
+                breakpoints={{
+                    '500': {
+                        'slidesPerView': 3,
+                    },
+                    '800': {
+                        'slidesPerView': 4,
+                    },
+                    '1000': {
+                        'slidesPerView': 5,
+                    },
+                    '1200': {
+                        'slidesPerView': 6,
+                    }
                 }}
             >
             {
