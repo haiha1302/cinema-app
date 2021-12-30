@@ -4,6 +4,7 @@ import styled from "styled-components"
 import CardSimilar from "../Components/CardSimilar"
 import http from '../utils/http'
 import Frame from "../Components/Frame"
+import Meta from "../Components/Meta"
 
 const StyleWatch = styled.div`
     .main-watch {
@@ -48,36 +49,39 @@ const Watch = () => {
     }, [])
 
     return (
-        <StyleWatch className="d-flex container">
-            <div className="main-watch container">
-                <div className="col-9">
-                    <div>
-                        <Frame 
-                            type='movie'
-                            id={params.id}
-                        />
-                    </div>
-                    <div className="text-light">
-                        <div className="fs-1">{detailsData.title}</div>
-                        <p className="fst-italic">{detailsData.tagline}</p>
-                        <div className="fs-5">{detailsData.overview}</div>
-                        <div>Release date: {detailsData.release_date}</div>
-                    </div>
-                </div>
-                <div className="col-3 similar">
-                    {dataSimilar.map(data => {
-                        return (
-                            <CardSimilar 
-                                key={data.id}
-                                title={data.title}
-                                poster_path={data.poster_path}
-                                id={data.id}
+        <>
+            <Meta title={detailsData.title} description={detailsData.tagline} />
+            <StyleWatch className="d-flex container">
+                <div className="main-watch container">
+                    <div className="col-9">
+                        <div>
+                            <Frame 
+                                type='movie'
+                                id={params.id}
                             />
-                        )
-                    })}
+                        </div>
+                        <div className="text-light">
+                            <div className="fs-1">{detailsData.title}</div>
+                            <p className="fst-italic">{detailsData.tagline}</p>
+                            <div className="fs-5">{detailsData.overview}</div>
+                            <div>Release date: {detailsData.release_date}</div>
+                        </div>
+                    </div>
+                    <div className="col-3 similar">
+                        {dataSimilar.map(data => {
+                            return (
+                                <CardSimilar 
+                                    key={data.id}
+                                    title={data.title}
+                                    poster_path={data.poster_path}
+                                    id={data.id}
+                                />
+                            )
+                        })}
+                    </div>
                 </div>
-            </div>
-        </StyleWatch>
+            </StyleWatch>
+        </>
     )
 }
 

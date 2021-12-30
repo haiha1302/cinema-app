@@ -3,6 +3,7 @@ import BannerSlide from "../Components/BannerSlide/BannerSlide"
 import Slider from "../Components/Slider"
 import http from '../utils/http'
 import Loading from "../Components/Loading"
+import Meta from "../Components/Meta"
 
 const Home = () => {
     const [dataTrending, setDataTrending] = useState([])
@@ -75,6 +76,7 @@ const Home = () => {
 
     return (
         <div>
+            <Meta title='Cinema App By HL' />
             {
                 loading === true ?
                 <Loading typeLoad='Plane' position='center' /> :

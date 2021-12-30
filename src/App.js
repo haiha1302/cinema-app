@@ -11,6 +11,7 @@ import Footer from './Components/Shared/Footer';
 import WatchTVSeries from './Pages/WatchTVSeries';
 import Login from './Auth/Login';
 import Register from './Auth/Register';
+import Meta from './Components/Meta';
 
 const AppStyle = styled.div`
   background-color: #02080f;
@@ -46,6 +47,7 @@ function App() {
 
   return (
     <AppStyle>
+      <Meta title='Cinema App By HL' description='Movies and Tv Series free' />
       <NavigationBar user={user} />
       <Routes>
         <Route path="/" element={<Home />} />

@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { BsFacebook, BsTwitter, BsGoogle, BsGithub } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
+import Meta from '../Components/Meta'
 
 const FormLoginStyle = styled.div`
     display: flex;
@@ -8,6 +9,7 @@ const FormLoginStyle = styled.div`
     justify-content: center;
     align-items: center;
     color: white;
+    cursor: pointer;
 
     .title {
         margin: 100px 0 0 0;
@@ -67,49 +69,50 @@ const FormLoginStyle = styled.div`
 `
 
 const Login = () => {
-    const LoginGoogle = () => window.open(`http://localhost:5000/auth/google`, '_self')
+    const LoginGoogle = () => window.open(`${process.env.BASE_URL}/auth/google`, '_self')
 
-    const LoginGithub = () => window.open(`http://localhost:5000/auth/github`, '_self')
-
-    // const LoginDiscord = () => window.open('http://localhost:5000/auth/discord', '_self')
+    const LoginGithub = () => window.open(`${process.env.BASE_URL}/auth/github`, '_self')
 
     return (
-        <FormLoginStyle>
-            <h3 className='title'>Create your account</h3>
-            <div className='style-input'>
-                <label>Username</label>
-                <input type='text' placeholder="Username" />
-            </div>
-            <div className='style-input'>
-                <label>Password</label>
-                <input type='password' placeholder="Password" />
-            </div>
-            <div>
-                <button className='btnSubmit'>Submit</button>
-            </div>
-            <div>
-                Click here to <Link to='/register'>Register</Link>
-            </div>
-            <div className='mt-4'>
-                <div 
-                    className='btn-login-social btnFb'>
-                    <BsFacebook />
-                    Login with Facebook
+        <>
+            <Meta title='Login your account' description='Login account' />
+            <FormLoginStyle>
+                <h3 className='title'>Create your account</h3>
+                <div className='style-input'>
+                    <label>Username</label>
+                    <input type='text' placeholder="Username" />
                 </div>
-                <div className='btn-login-social btnGg' onClick={LoginGoogle}>
-                    <BsGoogle />
-                    Login with Google
+                <div className='style-input'>
+                    <label>Password</label>
+                    <input type='password' placeholder="Password" />
                 </div>
-                <div className='btn-login-social btnTw'>
-                    <BsTwitter />
-                    Login with Twitter
+                <div>
+                    <button className='btnSubmit'>Submit</button>
                 </div>
-                <div className='btn-login-social btnGh' onClick={LoginGithub}>
-                    <BsGithub />
-                    Login with Github
+                <div>
+                    Click here to <Link to='/register'>Register</Link>
                 </div>
-            </div>
-        </FormLoginStyle>
+                <div className='mt-4'>
+                    <div 
+                        className='btn-login-social btnFb'>
+                        <BsFacebook />
+                        Login with Facebook
+                    </div>
+                    <div className='btn-login-social btnGg' onClick={LoginGoogle}>
+                        <BsGoogle />
+                        Login with Google
+                    </div>
+                    <div className='btn-login-social btnTw'>
+                        <BsTwitter />
+                        Login with Twitter
+                    </div>
+                    <div className='btn-login-social btnGh' onClick={LoginGithub}>
+                        <BsGithub />
+                        Login with Github
+                    </div>
+                </div>
+            </FormLoginStyle>
+        </>
     )
 }
 

@@ -5,6 +5,7 @@ import CardSlide from '../Components/CardSlide'
 import CustomPagination from '../Components/CustomPagination'
 import styled from 'styled-components'
 import Loading from '../Components/Loading'
+import Meta from '../Components/Meta'
 
 const MainPage = styled.div`
     display: flex;
@@ -52,6 +53,7 @@ const Movies = (props) => {
 
     return (
         <>
+            <Meta title='Movies' description='Movies' />
             {
                 loading === true ?
                 <Loading typeLoad='Plane' position='center' /> :

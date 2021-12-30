@@ -5,6 +5,8 @@ import styled from "styled-components"
 import Button from "../Components/Button"
 import Loading from "../Components/Loading"
 import ShowSeasons from "../Components/ShowSeasons/ShowSeasons"
+import Meta from "../Components/Meta"
+import StarRating from '../Components/StarRating'
 
 const Details = styled.div`
     position: absolute;
@@ -61,6 +63,7 @@ const WatchDetails = () => {
 
     return (
         <>
+            <Meta title={dataDetails.title || dataDetails.name} description={dataDetails.tagline} />
             {
                 loading === true ?
                 <Loading typeLoad='Plane' position='center' /> :
@@ -91,6 +94,10 @@ const WatchDetails = () => {
                                     <div className="fs-4">{dataDetails.overview}</div>
                                     <div className="fs-5 fst-italic">Release Date: {dataDetails.release_date || dataDetails.first_air_date}</div>
                                     <div>Vote: {dataDetails.vote_average}</div>
+                                    <StarRating 
+                                        stars={Math.round(dataDetails.vote_average)}
+                                        extraText={`(${dataDetails.vote_count} votes)`}
+                                    />
                                     <div>acctor</div>
                                 </div>
                             </div>

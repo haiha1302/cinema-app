@@ -5,6 +5,7 @@ import CardSlide from '../Components/CardSlide'
 import CustomPagination from '../Components/CustomPagination'
 import styled from 'styled-components'
 import Loading from '../Components/Loading'
+import Meta from '../Components/Meta'
 
 const MainPage = styled.div`
     display: flex;
@@ -52,6 +53,7 @@ const TVSeries = () => {
 
     return (
         <>
+            <Meta title='TV Series' description='TV Series' />
             {
                 loading === true ?
                 <Loading typeLoad='Plane' position='center' /> :

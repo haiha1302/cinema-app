@@ -15,18 +15,17 @@ const NavLinkStyle = styled.div`
     }
     .navLink:hover {
         color: #b3c4ff;
-        border: 1px solid #b3c4ff;
+        
     }
 
     .active {
         color: #FADC22;
-        border: 1px solid #FADC22;
     }
 `
 
 const NavigationBar = (props) => {
     const handleLogout = () => {
-        window.open("http://localhost:5000/auth/logout", "_self");
+        window.open(`${process.env.BASE_URL}/auth/logout", "_self`);
     };
 
     return (

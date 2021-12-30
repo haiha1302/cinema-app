@@ -4,6 +4,7 @@ import http from '../utils/http'
 import styled from "styled-components"
 import { useParams } from "react-router-dom"
 import Seasons from '../Components/DropdownSeasons/Seasons'
+import Meta from "../Components/Meta"
 
 const StyleWatch = styled.div`
     .main-watch {
@@ -33,39 +34,44 @@ const WatchTVSeries = () => {
         })
         setDetailsData(data.data)
     }
-    
+
     useEffect(() => {
         fetchDetailsTVSeries()
     }, [])
 
     return (
-        <StyleWatch className="d-flex container">
-             <div className="main-watch container">
-                <div className="col-9">
-                    <div>
-                        <Frame 
-                            type='tv'
-                            id={params.id}
-                            season_id={params.season_id}
-                            episode_id={params.episode_id}
-                        />
+        <>
+            <Meta 
+                title={`${detailsData.name} Season ${params.season_id === '0' ? 'Special' : params.season_id} Episode ${params.episode_id}`} 
+                description={detailsData.tagline} />
+            <StyleWatch className="d-flex container">
+                <div className="main-watch container">
+                    <div className="col-9">
+                        <div>
+                            <Frame 
+                                type='tv'
+                                id={params.id}
+                                season_id={params.season_id}
+                                episode_id={params.episode_id}
+                            />
+                        </div>
+                        <div className="text-light">
+                            <div className="fs-1">{detailsData.name}</div>
+                            <p className="fst-italic">{detailsData.tagline}</p>
+                            <div className="fs-5">{detailsData.overview}</div>
+                            <div>Release date: {detailsData.release_date}</div>
+                        </div>
                     </div>
-                    <div className="text-light">
-                        <div className="fs-1">{detailsData.name}</div>
-                        <p className="fst-italic">{detailsData.tagline}</p>
-                        <div className="fs-5">{detailsData.overview}</div>
-                        <div>Release date: {detailsData.release_date}</div>
+                    <div className="col-3 seasons">
+                        {
+                            detailsData.seasons ? 
+                            <Seasons type={params.type} id={params.id} seasons={detailsData.seasons} /> :
+                            null
+                        }
                     </div>
                 </div>
-                <div className="col-3 seasons">
-                    {
-                        detailsData.seasons ? 
-                        <Seasons type={params.type} id={params.id} seasons={detailsData.seasons} /> :
-                        null
-                    }
-                </div>
-            </div>
-        </StyleWatch>
+            </StyleWatch>
+        </>
     )
 }
 
