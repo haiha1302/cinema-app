@@ -53,7 +53,7 @@ const TVSeries = () => {
 
     return (
         <>
-            <Meta title='TV Series' description='TV Series' />
+            <Meta title='TV Series'/>
             {
                 loading === true ?
                 <Loading typeLoad='Plane' position='center' /> :
@@ -66,7 +66,7 @@ const TVSeries = () => {
                                         <Col key={data.id} sm>
                                             <CardSlide 
                                                 id={data.id}
-                                                type='tv'
+                                                media_type='tv'
                                                 title={data.name}
                                                 poster_path={data.poster_path}
                                             />

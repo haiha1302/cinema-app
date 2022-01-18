@@ -41,15 +41,13 @@ const WatchTVSeries = () => {
 
     return (
         <>
-            <Meta 
-                title={`${detailsData.name} Season ${params.season_id === '0' ? 'Special' : params.season_id} Episode ${params.episode_id}`} 
-                description={detailsData.tagline} />
+            <Meta title={`${detailsData.name} Season ${params.season_id === '0' ? 'Special' : params.season_id} Episode ${params.episode_id}`} />
             <StyleWatch className="d-flex container">
                 <div className="main-watch container">
                     <div className="col-9">
                         <div>
                             <Frame 
-                                type='tv'
+                                media_type='tv'
                                 id={params.id}
                                 season_id={params.season_id}
                                 episode_id={params.episode_id}

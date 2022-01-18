@@ -11,7 +11,7 @@ const Frame = (props) => {
     return (
         <FrameStyle>  
             <iframe 
-                src={props.type === 'movie' ?
+                src={props.media_type === 'movie' ?
                 urlEmbedMovie(props.id) :
                 urlEmbedTV(props.id, props.season_id, props.episode_id)
                 }

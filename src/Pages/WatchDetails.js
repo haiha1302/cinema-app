@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react"
 import { Link, useParams } from 'react-router-dom'
-import http from '../utils/http'
 import styled from "styled-components"
 import Button from "../Components/Button"
 import Loading from "../Components/Loading"
 import ShowSeasons from "../Components/ShowSeasons/ShowSeasons"
 import Meta from "../Components/Meta"
 import StarRating from '../Components/StarRating'
+import { getMovieDetails } from '../utils/apis'
+import SliderActor from "../Components/SliderActor"
 
 const Details = styled.div`
     position: absolute;
@@ -38,23 +39,29 @@ const BannerImg = styled.div`
 
 const WatchDetails = () => {
     const params = useParams()
-    const [dataDetails, setDataDetails] = useState([])
+    const [data, setData] = useState()
+    const [casts, setCasts] = useState()
+    const [similar, setSimilar] = useState()
+    const [videos, setVideos] = useState()
     const [loading, setLoading] = useState(true)
 
-    const fetchDataDetails = async () => {
-        const data = await http.get(`/${params.type}/${params.id}`,
-        {
-            params: {
-                language: "en-US",
-            },
-        });
-        setDataDetails(data.data)
-    }
-    
     useEffect(() => {
-        fetchDataDetails()
-    }, [])
+        const resultsMovieDetails = () => {
+            getMovieDetails(params.media_type, params.id)
+            .then(
+                res => {
+                    setData(res.data)
+                    setCasts(res.casts)
+                    setSimilar(res.similar)
+                    setVideos(res.videos)
+                }
+            )
+            .catch(err => console.log(err))
+        }
 
+        resultsMovieDetails()
+    }, [])
+    
     useEffect(() =>{
         setTimeout(() => {
             setLoading(false)
@@ -63,14 +70,14 @@ const WatchDetails = () => {
 
     return (
         <>
-            <Meta title={dataDetails.title || dataDetails.name} description={dataDetails.tagline} />
+            <Meta title={data?.title || data?.name} />
             {
                 loading === true ?
                 <Loading typeLoad='Plane' position='center' /> :
                 <>
                     <Details>
                         <img
-                            src={dataDetails.backdrop_path ? `https://image.tmdb.org/t/p/original/${dataDetails.backdrop_path}` : null}
+                            src={data.backdrop_path ? `https://image.tmdb.org/t/p/original/${data.backdrop_path}` : null}
                             alt="banner"
                             className="big-img-banner w-100 mask absolute top-0"
                         />
@@ -78,34 +85,37 @@ const WatchDetails = () => {
                             <div className="banner-info container d-flex">
                                 <BannerImg>
                                     <img
-                                        src={dataDetails.poster_path ? `https://image.tmdb.org/t/p/w300${dataDetails.poster_path}` : null}
+                                        src={data.poster_path ? `https://image.tmdb.org/t/p/w300${data.poster_path}` : null}
                                         alt="poster"
                                         className="banner-img"
                                     />
                                 </BannerImg>
                                 <div className=" text-light ms-4 me-5">
                                     <div>
-                                        <Link to={params.type === 'movie' ? `/${params.type}/${params.id}` : `/${params.type}/${params.id}/season=1/episode=1`}>
+                                        <Link to={params.media_type === 'movie' ? `/${params.media_type}/${params.id}` : `/${params.media_type}/${params.id}/season=1/episode=1`}>
                                             <Button name='Play Now' />
                                         </Link>
                                     </div>
-                                    <div className="fs-1 fw-bold">{dataDetails.title || dataDetails.name}</div>
-                                    <div className="fst-italic fs-6">{dataDetails.tagline}</div>
-                                    <div className="fs-4">{dataDetails.overview}</div>
-                                    <div className="fs-5 fst-italic">Release Date: {dataDetails.release_date || dataDetails.first_air_date}</div>
-                                    <div>Vote: {dataDetails.vote_average}</div>
+                                    <div className="fs-1 fw-bold">{data.title || data.name}</div>
+                                    <div className="fst-italic fs-6">{data.tagline}</div>
+                                    <div className="fs-4">{data.overview}</div>
+                                    <div className="fs-5 fst-italic">Release Date: {data.release_date || data.first_air_date}</div>
+                                    <div>Vote: {data.vote_average}</div>
                                     <StarRating 
-                                        stars={Math.round(dataDetails.vote_average)}
-                                        extraText={`(${dataDetails.vote_count} votes)`}
+                                        stars={Math.round(data.vote_average)}
+                                        extraText={`(${data.vote_count} votes)`}
                                     />
                                     <div>acctor</div>
                                 </div>
                             </div>
+                            <div>
+                                <SliderActor casts={casts} />
+                            </div>
                         </div>
                         
                         {
-                            params.type === 'tv' ?
-                            <ShowSeasons data={dataDetails.seasons} id={params.id} /> :
+                            params.media_type === 'tv' ?
+                            <ShowSeasons data={data.seasons} id={params.id} /> :
                             null
                         }
                     </Details>

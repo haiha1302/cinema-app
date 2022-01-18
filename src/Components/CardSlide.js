@@ -23,7 +23,7 @@ const CardStyle = styled.div`
         transition: all 0.3s ease;
     }
 
-    @media (max-width: 990px) {
+    ${'' /* @media (max-width: 990px) {
         .poster {
             height: 230px;
         }
@@ -39,7 +39,7 @@ const CardStyle = styled.div`
         .poster {
             height: 280px;
         }
-    }
+    } */}
 
     .poster:hover {
         transform: scale(1.05);
@@ -53,7 +53,7 @@ const CardStyle = styled.div`
 
 const CardSlide = (props) => {
     return (
-        <Link to={`/details/${props.type}/${props.id}`} className='text-decoration-none link'>
+        <Link to={`/details/${props.media_type}/${props.id}`} className='text-decoration-none link'>
             <CardStyle>
                 <img 
                     className='poster' 

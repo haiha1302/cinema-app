@@ -6,6 +6,7 @@ import CustomPagination from '../Components/CustomPagination'
 import styled from 'styled-components'
 import Loading from '../Components/Loading'
 import Meta from '../Components/Meta'
+import { getDataMovies } from '../utils/apis'
 
 const MainPage = styled.div`
     display: flex;
@@ -36,7 +37,7 @@ const Movies = (props) => {
     useEffect(() => {
         fetchMoviesData()
         window.scroll(0, 0)
-    }, [page])
+    },[page])
 
     useEffect(() => {
         setTimeout(() => {
@@ -53,7 +54,7 @@ const Movies = (props) => {
 
     return (
         <>
-            <Meta title='Movies' description='Movies' />
+            <Meta title='Movies'/>
             {
                 loading === true ?
                 <Loading typeLoad='Plane' position='center' /> :
@@ -66,10 +67,10 @@ const Movies = (props) => {
                                         <Col key={data.id} sm>
                                             <CardSlide 
                                                 id={data.id}
-                                                type='movie'
+                                                media_type='movie'
                                                 title={data.title}
                                                 poster_path={data.poster_path}
-                                                handleDetails={props.handleDetails}
+                                                // handleDetails={props.handleDetails}
                                             />
                                         </Col>
                                     )

@@ -33,6 +33,7 @@ function App() {
       })
         .then((response) => {
           if (response.status === 200) return response.json();
+          console.log(response.json())
           throw new Error("authentication has been failed!");
         })
         .then((resObject) => {
@@ -53,9 +54,9 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/movies" element={<Movies />} />
         <Route path="/tvseries" element={<TVSeries />} />
-        <Route path="/details/:type/:id" element={<WatchDetails />} />
-        <Route path='/:type/:id' element={user ? <WatchMovie /> : <Login />} />
-        <Route path={`/:type/:id/season=:season_id/episode=:episode_id`} element={<WatchTVSeries />} />
+        <Route path="/details/:media_type/:id" element={<WatchDetails />} />
+        <Route path='/:media_type/:id' element={user ? <WatchMovie /> : <Login />} />
+        <Route path='/:type/:id/season=:season_id/episode=:episode_id' element={<WatchTVSeries />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
       </Routes>

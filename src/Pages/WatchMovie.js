@@ -29,7 +29,7 @@ const Watch = () => {
 
     const fetchDataSimilar = async () => {
         const data = await Promise.all([
-            http.get(`/${params.type}/${params.id}`, {
+            http.get(`/${params.media_type}/${params.id}`, {
                 params: {
                     language: "en-US",
                 },
@@ -50,13 +50,13 @@ const Watch = () => {
 
     return (
         <>
-            <Meta title={detailsData.title} description={detailsData.tagline} />
+            <Meta title={detailsData.title} />
             <StyleWatch className="d-flex container">
                 <div className="main-watch container">
                     <div className="col-9">
                         <div>
                             <Frame 
-                                type='movie'
+                                media_type='movie'
                                 id={params.id}
                             />
                         </div>

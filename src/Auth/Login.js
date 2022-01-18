@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { BsFacebook, BsTwitter, BsGoogle, BsGithub } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
 import Meta from '../Components/Meta'
+// import http from '../utils/http'
 
 const FormLoginStyle = styled.div`
     display: flex;
@@ -69,10 +70,13 @@ const FormLoginStyle = styled.div`
 `
 
 const Login = () => {
-    const LoginGoogle = () => window.open(`${process.env.BASE_URL}/auth/google`, '_self')
+    // const url = 'https://backend-cinema-app.herokuapp.com'
+    const url = process.env.REACT_APP_BASE_URL
+    console.log(url);
+    const LoginGoogle = () => window.open(`${url}/auth/google`, '_self')
 
-    const LoginGithub = () => window.open(`${process.env.BASE_URL}/auth/github`, '_self')
-
+    const LoginGithub = () => window.open(`${url}/auth/github`, '_self')
+    
     return (
         <>
             <Meta title='Login your account' description='Login account' />

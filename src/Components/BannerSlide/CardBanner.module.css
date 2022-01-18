@@ -1,10 +1,10 @@
-.bannerContainer {
+/* .bannerContainer {
     display: flex;
     flex-direction: row-reverse;
     justify-content: center;
     align-items: center;
     margin: 100px 100px;
-}
+} */
 
 .posterInfo {
     display: flex;
@@ -20,6 +20,14 @@
     padding: 30px 100px 30px 0;
     color: white;
 }
+
+.voteDate {
+    color: #0bbe06;
+}
+
+/* .textInfoOverview {
+
+} */
 
 .textInfoTitle {
     font-size: 32px;

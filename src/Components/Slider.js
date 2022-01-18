@@ -46,7 +46,7 @@ const Slider = (props) => {
                         <SwiperSlide key={data.id}>
                             <CardSlide 
                                 id={data.id}
-                                type={props.type || data.media_type}
+                                media_type={props.media_type || data.media_type}
                                 poster_path={data.poster_path}
                                 title={data.title || data.name}
                             />

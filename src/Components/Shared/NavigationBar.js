@@ -24,8 +24,10 @@ const NavLinkStyle = styled.div`
 `
 
 const NavigationBar = (props) => {
+    const url = 'https://backend-cinema-app.herokuapp.com'
+
     const handleLogout = () => {
-        window.open(`${process.env.BASE_URL}/auth/logout", "_self`);
+        window.open(`${url}/auth/logout`, "_self");
     };
 
     return (

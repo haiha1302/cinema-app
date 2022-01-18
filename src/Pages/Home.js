@@ -4,36 +4,13 @@ import Slider from "../Components/Slider"
 import http from '../utils/http'
 import Loading from "../Components/Loading"
 import Meta from "../Components/Meta"
+import { getDataHomepage } from "../utils/apis"
 
 const Home = () => {
     const [dataTrending, setDataTrending] = useState([])
     const [dataMovies, setDataMovies] = useState([])
     const [dataTVSeries, setDataTVSeries] = useState([])
     const [loading, setLoading] = useState(true)
-
-    const fetchData = async () => {
-        const resData = await Promise.all([
-        http('/trending/all/day', {}),
-        http('/discover/movie', {
-            params: {
-            language: 'en-US',
-            sort_by: 'popularity.desc',
-            include_adult: false,
-            include_video: false,
-            }
-        }),
-        http('/discover/tv', {
-            language: 'en-US',
-            sort_by: 'popularity.desc',
-            include_adult: false,
-            include_video: false,
-        })
-        ])
-
-        setDataTrending(resData[0].data.results)
-        setDataMovies(resData[1].data.results)
-        setDataTVSeries(resData[2].data.results)
-    }
 
     const dataBanner = dataTrending.slice(0, 10)
 
@@ -46,18 +23,27 @@ const Home = () => {
         {
             title: 'Movies',
             path: '/movies',
-            type: 'movie',
+            media_type: 'movie',
             value: dataMovies
         },
         {
             title: 'TV Series',
             path: '/tvseries',
-            type: 'tv',
+            media_type: 'tv',
             value: dataTVSeries
         }
     ]
 
     useEffect(() => {
+        const fetchData = () => {
+            getDataHomepage()
+            .then(res => {
+                setDataTrending(res[0].data.results)
+                setDataMovies(res[1].data.results)
+                setDataTVSeries(res[2].data.results)
+            })
+            .catch(err => console.log(err))
+        }
         fetchData()
     }, [])
 
@@ -76,7 +62,7 @@ const Home = () => {
 
     return (
         <div>
-            <Meta title='Cinema App By HL' />
+            <Meta title='Cinema App By HL'/>
             {
                 loading === true ?
                 <Loading typeLoad='Plane' position='center' /> :
@@ -87,7 +73,7 @@ const Home = () => {
                             <Slider
                                 key={data.title}
                                 title={data.title}
-                                type={data.type}
+                                media_type={data.media_type}
                                 path={data.path}
                                 data={data.value}
                             />
