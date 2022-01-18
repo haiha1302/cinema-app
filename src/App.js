@@ -55,7 +55,7 @@ function App() {
         <Route path="/movies" element={<Movies />} />
         <Route path="/tvseries" element={<TVSeries />} />
         <Route path="/details/:media_type/:id" element={<WatchDetails />} />
-        <Route path='/:media_type/:id' element={user ? <WatchMovie /> : <Login />} />
+        <Route path='/:media_type/:id' element={<WatchMovie />} />
         <Route path='/:type/:id/season=:season_id/episode=:episode_id' element={<WatchTVSeries />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
